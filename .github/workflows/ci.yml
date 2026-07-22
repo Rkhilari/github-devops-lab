@@ -1,8 +1,29 @@
+name: CI Pipeline
+
 on:
   push:
     branches:
       - main
-
+      - feature/**
   pull_request:
-
   workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Print Current Directory
+        run: pwd
+
+      - name: Display Repository Files
+        run: ls -la
+
+      - name: Display README
+        run: cat README.md
+
+      - name: Print Success Message
+        run: echo "CI Pipeline Completed Successfully!"
