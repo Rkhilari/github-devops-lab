@@ -6,11 +6,19 @@ on:
       - main
       - feature/**
   pull_request:
+    branches:
+      - main
   workflow_dispatch:
+
+env:
+  APP_NAME: github-devops-lab
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      JOB_NAME: Build Job
 
     steps:
       - name: Checkout Repository
@@ -24,6 +32,18 @@ jobs:
 
       - name: Display README
         run: cat README.md
+
+      - name: Print Workflow Environment Variable
+        run: echo "Application = $APP_NAME"
+
+      - name: Print Job Environment Variable
+        run: echo "Job = $JOB_NAME"
+
+      - name: Print Repository Variable
+        run: echo "Environment = ${{ vars.ENVIRONMENT }}"
+
+      - name: Print Repository Secret
+        run: echo "Hello ${{ secrets.MY_NAME }}"
 
       - name: Print Success Message
         run: echo "CI Pipeline Completed Successfully!"
